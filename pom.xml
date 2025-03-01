@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.shaon</groupId>
-	<artifactId>kubernetes</artifactId>
+	<artifactId>bookmark</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>kubernetes</name>
+	<name>bookmark</name>
 	<description>Demo project for Spring Boot and kubernetes</description>
 	<url/>
 	<licenses>
@@ -28,6 +28,8 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
 	</properties>
 	<dependencies>
 		<dependency>
