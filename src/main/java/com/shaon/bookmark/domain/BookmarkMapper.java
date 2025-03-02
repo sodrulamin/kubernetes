@@ -6,6 +6,11 @@ import org.springframework.stereotype.Component;
 public class BookmarkMapper {
     public BookmarkDTO toDto (Bookmark bookmark) {
 
-        return new BookmarkDTO(bookmark.getId(), bookmark.getTitle(), bookmark.getUrl(), bookmark.getCreatedAt());
+        return new BookmarkDTO(
+                bookmark.getId(),
+                bookmark.getTitle(),
+                bookmark.getUrl(),
+                bookmark.getCreatedAt()
+        );
     }
 }
