@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.shaon</groupId>
-	<artifactId>bookmark</artifactId>
+	<artifactId>bookmarker-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>bookmark</name>
 	<description>Demo project for Spring Boot and kubernetes</description>
