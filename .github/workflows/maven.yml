@@ -13,10 +13,9 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
-
+  build-bookmarker-api:
+    name: Build bookmarker-api
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 21
@@ -34,3 +33,32 @@ jobs:
           mvn clean package jib:dockerBuild -DskipTests -Djib.to.image=${{ secrets.DOCKER_USERNAME }}/bookmarker-api:latest
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           docker push ${{ secrets.DOCKER_USERNAME }}/bookmarker-api
+
+  build-bookmarker-ui:
+    name: Build bookmarker-ui
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./bookmarker-ui-nextjs
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+          cache: 'yarn'
+          cache-dependency-path: bookmarker-ui-nextjs/yarn.lock
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build
+        run: yarn build
+
+      - if: ${{ github.ref == 'refs/heads/master' }}
+        name: Build and Publish Docker Image
+        run: |
+          mvn clean package jib:dockerBuild -DskipTests -Djib.to.image=${{ secrets.DOCKER_USERNAME }}/bookmarker-ui-nextjs:latest
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/bookmarker-ui-nextjs
